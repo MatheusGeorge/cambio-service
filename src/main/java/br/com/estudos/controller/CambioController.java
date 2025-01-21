@@ -2,6 +2,8 @@ package br.com.estudos.controller;
 
 import br.com.estudos.model.Cambio;
 import br.com.estudos.repository.CambioRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import java.math.RoundingMode;
 
 @RestController
 @RequestMapping("cambio-service")
+@Tag(name = "Cambio endpoint")
 public class CambioController {
 
     @Autowired
@@ -23,6 +26,7 @@ public class CambioController {
     private CambioRepository repository;
 
     @GetMapping(value = "/{amount}/{from}/{to}")
+    @Operation(summary = "Get cambio from currency")
     public Cambio getCambio(
             @PathVariable("amount") BigDecimal amount,
             @PathVariable("from") String from,
